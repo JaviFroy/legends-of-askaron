@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 const app = express();
-const { v4: uuidv4 } = require('uuid');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const port = 3000;
@@ -92,7 +91,6 @@ app.post('/characters', function (req, res, next) {
         });
 
         var character = {
-            "id": uuidv4(),
             "name": req.body.name,
             "age": req.body.age,
             "first_element": { "name": req.body.first_element },
