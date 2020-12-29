@@ -149,6 +149,4 @@ app.get('/elements', function (req, res, next) {
     });
 });
 
-app.listen(port, () => {
-    console.log("El servidor está inicializado en el puerto "+port);
-});
+app.listen(process.env.PORT || port);
