@@ -5,12 +5,10 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const port = 3000;
 const jwt = require('jsonwebtoken');
-const config = {
-    llave: "miclaveultrasecreta123*"
-};
+const accessTokenSecret = 'youraccesstokensecret';
 
 app.use(cors());
-app.set('llave', config.llave);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.options(function (req, res, next) {
@@ -65,29 +63,36 @@ app.get('/', function (req, res, next) {
 })
 
 
-
-
-
+const users = [
+    {
+        username: 'john',
+        password: 'admin',
+        role: 'admin'
+    }, {
+        username: 'anna',
+        password: 'member',
+        role: 'member'
+    }
+];
 
 app.post('/login', (req, res) => {
-    var user= req.body.user;
-    var password= req.body.password;
-    var body=req.body;
-    if((user == "user") && (password == "user")) {
-		const payload = {
-			check:  true
-		};
-		const token = jwt.sign(payload, app.get('llave'), {
-			expiresIn: 1440
-		});
-		res.json({
-			mensaje: 'Autenticación correcta',
-			token: token
-		});
+    // Read username and password from request body
+    const { username, password } = req.body;
+
+    // Filter user from the users array by username and password
+    const user = users.find(u => { return u.username === username && u.password === password });
+
+    if (user) {
+        // Generate an access token
+        const accessToken = jwt.sign({ username: user.username,  role: user.role }, accessTokenSecret);
+
+        res.json({
+            accessToken
+        });
     } else {
-        res.json({"body": body},{ "mensaje": "Usuario: "+user+" o contraseña: "+password+" incorrectos"})
+        res.send('Username or password incorrect');
     }
-})
+});
 
 
 const rutasProtegidas = express.Router();
