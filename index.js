@@ -5,10 +5,12 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const port = 3000;
 const jwt = require('jsonwebtoken');
-const accessTokenSecret = 'youraccesstokensecret';
+const config = {
+	llave : "miclaveultrasecreta123*"
+};
 
 app.use(cors());
-
+app.set('llave', config.llave);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.options(function (req, res, next) {
@@ -63,34 +65,23 @@ app.get('/', function (req, res, next) {
 })
 
 
-const users = [
-    {
-        username: 'john',
-        passwordname: 'admin',
-        role: 'admin'
-    }, {
-        usernamename: 'anna',
-        passwordname: 'member',
-        role: 'member'
-    }
-];
-
-app.post('/login', (req, res) => {
-    // Read username and password from request body
-    const { username, passwordname } = req.body;
-
-    // Filter user from the users array by username and password
-    const useritem = users.find(u => { return ((u.username == username) && (u.passwordname == passwordname)) });
-
-    if (useritem) {
-        // Generate an access token
-        const accessToken = jwt.sign({ username: user.username,  role: user.role }, accessTokenSecret);
-
-        res.json({
-            accessToken
+app.post('/login', function (req, res, next) {
+    if (!req.body) {
+        return res.status(400).json({
+            status: 'error',
+            error: 'req body cannot be empty',
         });
     } else {
-        res.send('incorrect '+username+ " __ "+ passwordname+" ++ "+useritem.username+"-"+useritem.passwordname);
+        if (req.body.name == "javi") {
+            const payload = {check: true};
+            const token = jwt.sign(payload, app.get('llave'), {expiresIn: 1440});
+            res.json({
+                mensaje: 'Autenticación correcta',
+                token: token
+            });
+        } else {
+            res.json({mensaje:"user: " +req.body.name });
+        }
     }
 });
 
