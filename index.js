@@ -69,7 +69,6 @@ app.get('/', function (req, res, next) {
 
 
 app.post('/autenticar', function (req, res, next) {
-    res.json({body:req.body});
     var usuario=req.body.usuario;
     var contrasena=req.body.contrasena;
     if (usuario === "asfo" && contrasena === "holamundo") {
