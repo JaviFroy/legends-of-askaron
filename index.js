@@ -4,7 +4,9 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const port = 3000;
-const config = require('./config');
+const config = {
+	llave : "miclaveultrasecreta123*"
+};
 
 app.use(cors());
 app.set('llave', config.llave);
