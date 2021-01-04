@@ -18,9 +18,9 @@ app.options(function (req, res, next) {
 
 //MONGO ATLAS
 const db = "assets";
-var user="client";
-var password="client";
-const mongoString = "mongodb+srv://"+user+":"+password+"@realmcluster.uidt7.mongodb.net/" + db + "?retryWrites=true&w=majority"
+var user = "client";
+var password = "client";
+const mongoString = "mongodb+srv://" + user + ":" + password + "@realmcluster.uidt7.mongodb.net/" + db + "?retryWrites=true&w=majority"
 mongoose.connect(mongoString, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.connection.on("error", function (error) {
     console.log(error)
@@ -55,8 +55,8 @@ const characterSchema = new Schema({
 const Character = mongoose.model('characters', characterSchema, 'characters');
 
 // GET INI
-app.get('/', function(req,res, next){
-    var pm="WELCOMO TO LEGENDS OF ASKARON"
+app.get('/', function (req, res, next) {
+    var pm = "WELCOMO TO LEGENDS OF ASKARON"
     console.log(pm);
     res.send(pm);
 })
@@ -67,42 +67,42 @@ app.get('/', function(req,res, next){
 
 
 app.post('/autenticar', (req, res) => {
-    if(req.body.usuario == "javi" && req.body.contrasena == "javi") {
-		const payload = {
-			check:  true
-		};
-		const token = jwt.sign(payload, app.get('llave'), {
-			expiresIn: 1440
-		});
-		res.json({
-			mensaje: 'Autenticación correcta',
-			token: token
-		});
+    if (req.body.usuario == "javi") {
+        const payload = {
+            check: true
+        };
+        const token = jwt.sign(payload, app.get('llave'), {
+            expiresIn: 1440
+        });
+        res.json({
+            mensaje: 'Autenticación correcta',
+            token: token
+        });
     } else {
-        res.json({ mensaje: "Usuario o contraseña incorrectos"})
+        res.json({ mensaje: "Usuario o contraseña incorrectos" })
     }
 })
 
 
-const rutasProtegidas = express.Router(); 
+const rutasProtegidas = express.Router();
 rutasProtegidas.use((req, res, next) => {
     const token = req.headers['access-token'];
-	
+
     if (token) {
-      jwt.verify(token, app.get('llave'), (err, decoded) => {      
-        if (err) {
-          return res.json({ mensaje: 'Token inválida' });    
-        } else {
-          req.decoded = decoded;    
-          next();
-        }
-      });
+        jwt.verify(token, app.get('llave'), (err, decoded) => {
+            if (err) {
+                return res.json({ mensaje: 'Token inválida' });
+            } else {
+                req.decoded = decoded;
+                next();
+            }
+        });
     } else {
-      res.send({ 
-          mensaje: 'Token no proveída.' 
-      });
+        res.send({
+            mensaje: 'Token no proveída.'
+        });
     }
- });
+});
 
 
 
