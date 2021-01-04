@@ -5,7 +5,6 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const port = 3000;
 
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,8 +15,10 @@ app.options(function (req, res, next) {
 });
 
 //MONGO ATLAS
-const db = "assets"
-const mongoString = "mongodb+srv://admin:admin@realmcluster.uidt7.mongodb.net/" + db + "?retryWrites=true&w=majority"
+const db = "assets";
+const user="client";
+const password="client";
+const mongoString = "mongodb+srv://"+user+":"+password+"@realmcluster.uidt7.mongodb.net/" + db + "?retryWrites=true&w=majority"
 mongoose.connect(mongoString, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.connection.on("error", function (error) {
     console.log(error)
@@ -50,6 +51,13 @@ const characterSchema = new Schema({
     description: String
 }, { strict: false }, { versionKey: false });
 const Character = mongoose.model('characters', characterSchema, 'characters');
+
+// GET INI
+app.get('/', function(req,res, next){
+    var pm="WELCOMO TO LEGENDS OF ASKARON"
+    console.log(pm);
+    res.send(pm);
+})
 
 
 // GET ALL CHARACTERS
