@@ -69,19 +69,19 @@ app.get('/', function (req, res, next) {
 
 
 app.post('/autenticar', (req, res) => {
-    if (req.body.usuario == "javi") {
-        const payload = {
-            check: true
-        };
-        const token = jwt.sign(payload, app.get('llave'), {
-            expiresIn: 1440
-        });
-        res.json({
-            mensaje: 'Autenticación correcta',
-            token: token
-        });
+    if(req.body.usuario === "asfo" && req.body.contrasena === "holamundo") {
+		const payload = {
+			check:  true
+		};
+		const token = jwt.sign(payload, app.get('llave'), {
+			expiresIn: 1440
+		});
+		res.json({
+			mensaje: 'Autenticación correcta',
+			token: token
+		});
     } else {
-        res.json({ mensaje: "Usuario o contraseña incorrectos" })
+        res.json({ mensaje: "Usuario o contraseña incorrectos"})
     }
 })
 
