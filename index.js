@@ -72,6 +72,10 @@ app.post('/login', function (req, res, next) {
             error: 'req body cannot be empty',
         });
     } else {
+        res.status(200).json({
+            status: 'succes',
+            data: req.body,
+        });
         if (req.body.name == "javi") {
             const payload = {check: true};
             const token = jwt.sign(payload, app.get('llave'), {expiresIn: 1440});
