@@ -69,7 +69,10 @@ app.get('/', function (req, res, next) {
 
 
 app.post('/autenticar', function (req, res, next) {
-    if (req.body.usuario === "asfo" && req.body.contrasena === "holamundo") {
+    console.log(req.body);
+    var usuario=req.body.usuario;
+    var contrasena=req.body.contrasena;
+    if (usuario === "asfo" && contrasena === "holamundo") {
         const payload = {
             check: true
         };
@@ -81,7 +84,7 @@ app.post('/autenticar', function (req, res, next) {
             token: token
         });
     } else {
-        res.json({ mensaje: "Usuario: " + req.body.usuario + " o contraseña: " + req.body.contrasena + " incorrectos" })
+        res.json({ mensaje: "Usuario: " + usuario + " o contraseña: " + contrasena + " incorrectos" })
     }
 })
 
