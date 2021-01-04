@@ -4,10 +4,12 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const port = 3000;
+const config = require('./config');
 
 app.use(cors());
-app.use(bodyParser.json());
+app.set('llave', config.llave);
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.options(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -16,8 +18,8 @@ app.options(function (req, res, next) {
 
 //MONGO ATLAS
 const db = "assets";
-const user="admin";
-const password="admin";
+const user="client";
+const password="client";
 const mongoString = "mongodb+srv://"+user+":"+password+"@realmcluster.uidt7.mongodb.net/" + db + "?retryWrites=true&w=majority"
 mongoose.connect(mongoString, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.connection.on("error", function (error) {
@@ -60,8 +62,54 @@ app.get('/', function(req,res, next){
 })
 
 
+
+
+
+
+app.post('/autenticar', (req, res) => {
+    if(req.body.usuario === "javi" && req.body.contrasena === "javi") {
+		const payload = {
+			check:  true
+		};
+		const token = jwt.sign(payload, app.get('llave'), {
+			expiresIn: 1440
+		});
+		res.json({
+			mensaje: 'Autenticación correcta',
+			token: token
+		});
+    } else {
+        res.json({ mensaje: "Usuario o contraseña incorrectos"})
+    }
+})
+
+
+const rutasProtegidas = express.Router(); 
+rutasProtegidas.use((req, res, next) => {
+    const token = req.headers['access-token'];
+	
+    if (token) {
+      jwt.verify(token, app.get('llave'), (err, decoded) => {      
+        if (err) {
+          return res.json({ mensaje: 'Token inválida' });    
+        } else {
+          req.decoded = decoded;    
+          next();
+        }
+      });
+    } else {
+      res.send({ 
+          mensaje: 'Token no proveída.' 
+      });
+    }
+ });
+
+
+
+
+
 // GET ALL CHARACTERS
-app.get('/characters', function (req, res, next) {
+app.get('/characters', rutasProtegidas, function (req, res, next) {
     const query = Character.find();
     query.sort('_id');
     query.select("-_id -__v");
