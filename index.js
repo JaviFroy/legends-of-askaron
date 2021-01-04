@@ -66,23 +66,23 @@ app.get('/', function (req, res, next) {
 const users = [
     {
         username: 'john',
-        password: 'admin',
+        passwordname: 'admin',
         role: 'admin'
     }, {
-        username: 'anna',
-        password: 'member',
+        usernamename: 'anna',
+        passwordname: 'member',
         role: 'member'
     }
 ];
 
 app.post('/login', (req, res) => {
     // Read username and password from request body
-    const { username, password } = req.body;
+    const { username, passwordname } = req.body;
 
     // Filter user from the users array by username and password
-    const user = users.find(u => { return u.username === username && u.password === password });
+    const useritem = users.find(u => { return u.username === username && u.passwordname === passwordname });
 
-    if (user) {
+    if (useritem) {
         // Generate an access token
         const accessToken = jwt.sign({ username: user.username,  role: user.role }, accessTokenSecret);
 
@@ -90,7 +90,7 @@ app.post('/login', (req, res) => {
             accessToken
         });
     } else {
-        res.send('Username or password incorrect');
+        res.send('Username or password incorrect '+useritem);
     }
 });
 
