@@ -90,7 +90,7 @@ app.post('/login', (req, res) => {
             accessToken
         });
     } else {
-        res.send('Username or password incorrect '+useritem+ " __ "+ req.body);
+        res.send('Username or password incorrect '+username+ " __ "+ passwordname);
     }
 });
 
