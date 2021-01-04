@@ -4,6 +4,7 @@ const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const port = 3000;
+const jwt = require('jsonwebtoken');
 const config = {
     llave: "miclaveultrasecreta123*"
 };
