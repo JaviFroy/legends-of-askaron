@@ -68,7 +68,7 @@ app.get('/', function (req, res, next) {
 
 
 
-app.post('/autenticar', (req, res) => {
+app.post('/autenticar', function (req, res, next) {
     if (req.body.usuario === "asfo" && req.body.contrasena === "holamundo") {
         const payload = {
             check: true
