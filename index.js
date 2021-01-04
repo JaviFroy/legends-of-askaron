@@ -18,8 +18,8 @@ app.options(function (req, res, next) {
 
 //MONGO ATLAS
 const db = "assets";
-const user="client";
-const password="client";
+var user="client";
+var password="client";
 const mongoString = "mongodb+srv://"+user+":"+password+"@realmcluster.uidt7.mongodb.net/" + db + "?retryWrites=true&w=majority"
 mongoose.connect(mongoString, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.connection.on("error", function (error) {
@@ -67,7 +67,7 @@ app.get('/', function(req,res, next){
 
 
 app.post('/autenticar', (req, res) => {
-    if(req.body.usuario === "javi" && req.body.contrasena === "javi") {
+    if(req.body.usuario == "javi" && req.body.contrasena == "javi") {
 		const payload = {
 			check:  true
 		};
