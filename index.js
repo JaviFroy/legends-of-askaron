@@ -16,8 +16,8 @@ app.options(function (req, res, next) {
 
 //MONGO ATLAS
 const db = "assets";
-const user="client";
-const password="client";
+const user="admin";
+const password="admin";
 const mongoString = "mongodb+srv://"+user+":"+password+"@realmcluster.uidt7.mongodb.net/" + db + "?retryWrites=true&w=majority"
 mongoose.connect(mongoString, { useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.connection.on("error", function (error) {
