@@ -69,22 +69,20 @@ app.get('/', function (req, res, next) {
 
 
 
-app.post('/autenticar', function (req, res, next) {
-    var usuario=req.body.usuario;
-    var contrasena=req.body.contrasena;
-    if (usuario === "asfo" && contrasena === "holamundo") {
-        const payload = {
-            check: true
-        };
-        const token = jwt.sign(payload, app.get('llave'), {
-            expiresIn: 1440
-        });
-        res.json({
-            mensaje: 'Autenticación correcta',
-            token: token
-        });
+app.post('/autenticar', (req, res) => {
+    if(req.body.usuario === "asfo" && req.body.contrasena === "holamundo") {
+		const payload = {
+			check:  true
+		};
+		const token = jwt.sign(payload, app.get('llave'), {
+			expiresIn: 1440
+		});
+		res.json({
+			mensaje: 'Autenticación correcta',
+			token: token
+		});
     } else {
-        res.json({ mensaje: "Usuario: " + usuario + " o contraseña: " + contrasena + " incorrectos" })
+        res.json({ mensaje: "Usuario: "+req.body.usuario+" o contraseña: "+req.body.contrasena+" incorrectos"})
     }
 })
 
