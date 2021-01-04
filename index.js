@@ -69,8 +69,11 @@ app.get('/', function (req, res, next) {
 
 
 
-app.post('/autenticar', (req, res) => {
-    if(req.body.usuario === "asfo" && req.body.contrasena === "holamundo") {
+app.post('/login', (req, res) => {
+    var user= req.body.user;
+    var password= req.body.password;
+    var body=req.body;
+    if(user === "user" && password === "1234") {
 		const payload = {
 			check:  true
 		};
@@ -82,7 +85,7 @@ app.post('/autenticar', (req, res) => {
 			token: token
 		});
     } else {
-        res.json({ mensaje: "Usuario: "+req.body.usuario+" o contraseña: "+req.body.contrasena+" incorrectos"})
+        res.json({"body": body},{ "mensaje": "Usuario: "+user+" o contraseña: "+password+" incorrectos"})
     }
 })
 
