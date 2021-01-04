@@ -73,7 +73,7 @@ app.post('/login', (req, res) => {
     var user= req.body.user;
     var password= req.body.password;
     var body=req.body;
-    if(user === "user" && password === "1234") {
+    if((user == "user") && (password == "user")) {
 		const payload = {
 			check:  true
 		};
