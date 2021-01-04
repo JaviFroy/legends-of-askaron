@@ -80,7 +80,7 @@ app.post('/login', (req, res) => {
     const { username, passwordname } = req.body;
 
     // Filter user from the users array by username and password
-    const useritem = users.find(u => { return (u.username == username) && (u.passwordname == passwordname) });
+    const useritem = users.find(u => { return ((u.username == username) && (u.passwordname == passwordname)) });
 
     if (useritem) {
         // Generate an access token
