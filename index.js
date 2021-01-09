@@ -66,7 +66,7 @@ app.get('/', function (req, res, next) {
 
 
 app.post('/login', function (req, res, next) {
-    console.log(req.body.username,req.body.passwordname);
+    console.log(req.body,req.body.username,req.body.passwordname);
     if (!req.body) {
         return res.status(400).json({
             status: 'error',
