@@ -72,7 +72,8 @@ app.post('/login', function (req, res, next) {
             error: 'req body cannot be empty',
         });
     } else {
-        if (req.body.name == "javi") {
+        if (req.body.username == "javi") {
+            console.log("login");
             const payload = {check: true};
             const token = jwt.sign(payload, app.get('llave'), {expiresIn: 1440});
             res.json({
@@ -80,6 +81,7 @@ app.post('/login', function (req, res, next) {
                 token: token
             });
         } else {
+            console.log("not login");
             res.json({mensaje:"user: " +req.body.name });
         }
     }
