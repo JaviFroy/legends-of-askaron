@@ -96,7 +96,7 @@ app.post('/login', function (req, res, next) {
       const token = jwt.sign(payload, app.get('llave'), {
         expiresIn: 1440
       });
-      res.json({
+      res.json({user:req.body.name,
         token: token
       });
     } else {
