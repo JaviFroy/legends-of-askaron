@@ -100,9 +100,7 @@ app.post('/login', function (req, res, next) {
       });
     } else {
       console.log("not login");
-      res.json({
-        mensaje: "not login"
-      });
+      err;
     }
   }
 });
