@@ -101,7 +101,7 @@ app.post('/login', function (req, res, next) {
     } else {
       console.log("not login");
       res.json({
-        mensaje: "user: " + req.body.username
+        mensaje: "not login"
       });
     }
   }
