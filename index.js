@@ -81,14 +81,13 @@ app.get('/', function (req, res, next) {
 
 
 app.post('/login', function (req, res, next) {
-  console.log(req.body, req.body.username, req.body.password);
   if (!req.body) {
     return res.status(400).json({
       status: 'error',
       error: 'req body cannot be empty',
     });
   } else {
-    if (req.body.username == "javi") {
+    if (req.body.username == "javi" && req.body.password=="admin") {
       console.log("login");
       const payload = {
         check: true
