@@ -100,7 +100,7 @@ app.post('/login', function (req, res, next) {
       });
     } else {
       console.log("not login");
-      err;
+      if (err) return handleError(err);
     }
   }
 });
