@@ -157,7 +157,7 @@ app.get('/characters/:id', function (req, res, next) {
   });
 });
 // POST NEW CHARACTER
-app.post('/characters',rutasProtegidas, function (req, res, next) {
+app.post('/characters', function (req, res, next) {
   if (!req.body) {
     return res.status(400).json({
       status: 'error',
