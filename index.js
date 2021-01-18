@@ -23,8 +23,8 @@ app.options(function (req, res, next) {
 
 //MONGO ATLAS
 const db = "assets";
-var user = "client";
-var password = "client";
+var user = "admin";
+var password = "admin";
 const mongoString = "mongodb+srv://" + user + ":" + password + "@realmcluster.uidt7.mongodb.net/" + db + "?retryWrites=true&w=majority"
 mongoose.connect(mongoString, {
   useNewUrlParser: true,
