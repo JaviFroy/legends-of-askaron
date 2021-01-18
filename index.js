@@ -170,6 +170,7 @@ app.post('/characters', function (req, res, next) {
     });
 
     var character = {
+      "id": req.body.id,
       "name": req.body.name,
       "age": req.body.age,
       "first_element": {
