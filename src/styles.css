@@ -1,0 +1,121 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  margin : 0px;
+  padding: 0px;
+}
+
+
+.wood {
+  color: #fffffe;
+  background: linear-gradient(rgba(214, 171, 119, 0.20),
+      rgba(173, 97, 54, 0.25),
+      rgba(173, 97, 54, 0.20),
+      rgba(173, 97, 54, 0.25),
+      rgba(214, 171, 119, 0.20));
+}
+
+.paper {
+  background-image: linear-gradient(80deg,
+      rgba(255, 210, 0, 0.25),
+      rgba(200, 160, 0, 0.1) 10%,
+      rgba(255, 255, 255, 0.2) 45%,
+      rgba(200, 160, 0, 0.1) 85%);
+  box-shadow:
+    inset 0 0 75px rgba(255, 210, 0, 0.1),
+    inset 0 0 20px rgba(255, 210, 0, 0.15),
+    inset 0 0 30px rgba(220, 120, 0, 0.2);
+}
+
+.sheet {
+  background-color   : rgba(0, 0, 0, 0);
+  border-width       : 50px;
+  border-style       : solid;
+  border-color       : rgba(245, 222, 179, 0.493);
+  border-image-source: url("./assets/image/pngwing.com.png");
+  border-image-slice : 150;
+  background         : url("./assets/image/fondo.png") center no-repeat;
+  background-size    : 100% 100%;
+  background-clip    : padding-box;
+}
+
+@font-face {
+  font-family: "aetherius";
+  src        : url("assets/fonts/aetherius.ttf") format("truetype");
+}
+
+.abaddon {
+  font-family: "aetherius", serif;
+}
+
+.strong {
+  font-size: 1.25rem !important;
+}
+
+.strong-1 {
+  font-size: 1.5rem !important;
+}
+
+.strong-2 {
+  font-size  : 1.75rem !important;
+  font-weight: bold !important;
+}
+
+.character {
+  position: relative;
+  display : inline-block;
+}
+
+.character .mode {
+  display : none;
+  position: absolute;
+  top     : 0;
+  left    : 0;
+  z-index : 99;
+}
+
+.character:hover .mode {
+  position: relative;
+  display : block;
+}
+
+.character:hover .normal {
+  display: none;
+}
+
+.card {
+  box-shadow: none;
+}
+
+body.wait {
+  cursor: wait !important;
+}
+
+body.wait a {
+  cursor: wait !important;
+}
+
+
+.stat-icon {
+  width : 15px !important;
+  height: 15px !important;
+}
+
+.description {
+  color: rgb(77, 77, 77);
+}
+
+.Attack_damage {
+  filter: brightness(0) invert(74%) sepia(48%) saturate(4545%) hue-rotate(343deg) brightness(98%) contrast(84%);
+}
+
+.Health {
+  filter: brightness(0) invert(45%) sepia(37%) saturate(6548%) hue-rotate(129deg) brightness(91%) contrast(75%);
+}
+
+.Mana {
+  filter: brightness(0) invert(42%) sepia(32%) saturate(4521%) hue-rotate(177deg) brightness(96%) contrast(83%);
+}
+
+.Armor {
+  filter: brightness(0) invert(89%) sepia(10%) saturate(4979%) hue-rotate(320deg) brightness(109%) contrast(92%);
+}
